@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TASK Graphs</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="./css/foundation.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+		<link rel="stylesheet" type="text/css" href="./css/delim.css">
+		<link rel="stylesheet" type="text/css" href="./css/linegraph.css">
+		<link rel="stylesheet" href="./css/foundation-datepicker.css" />
+	    <link rel="stylesheet" href="./css/gridstack.css"/>
+		<script src="./js/d3.v3.min.js"></script>
+	    <script src="./js/underscore.min.js"></script>
+	    <script src="./js/jquery-2.2.3.min.js"></script>
+	    <script src="./js/jquery-ui-1.12.1.min.js"></script>
+	    <script src="./js/gridstack.min.js"></script>
+	    <script src="./js/pullLocal.js"></script>
+	</head>
+
+
+	<body style="overflow-y:hidden;">
+
+		
+		<div style="margin-left:16%;position: absolute;right: 0;bottom: auto; left: 0;z-index: 1;">
+			<div id='cssmenu'>
+				<ul>
+					<li><a href='./projects.html'><span>About</span></a></li>
+				    <li><a href='./heatmap.html'><span>Heat Map</span></a></li>
+				    <li><a href='#'><span>Consumption Graph</span></a></li>
+				    <li><a href='./lexos.html'><span>Lexos</span></a></li>
+				</ul>
+			</div>
+		</div>
+
+
+
+		<div style="float:right;">
+			<div class="datepicker" style="position:relative;margin-top:35%;margin-left:-55%">
+				<table>
+				    <thead>
+				        <tr>
+				            <th>
+				                <a href="#" class="button tiny" id="dp4" data-date-format="yyyy-mm-dd">Change</a>
+				                <br> Start Date
+				            </th>
+				            <th>
+				                <a href="#" class="button tiny" id="dp5" data-date-format="yyyy-mm-dd">Change</a>
+				                <br> End Date
+				            </th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr>
+				            <td id="startDate"></td>
+				            <td id="endDate"></td>
+				        </tr>
+				    </tbody>
+				</table>
+				<div class="dropdown" style="margin-top:11.65%;margin-left:20.75%;">
+					<button class="dropbtn">Time Intervals</button>
+					<div class="dropdown-content">
+						<a href="#" onclick="byHoursL()">Hours</a>
+						<a href="#" onclick="byDaysL()">Days</a>
+						<a href="#" onclick="byWeeksL()">Weeks</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<center><img src="./images/loading.gif" id="loadingGif"></center>
+		<br style="display: block;margin-bottom:5%;">
+
+		<div id="cContainer" style="max-width:59% !important; margin-top:3%;margin-left: 5%;height:550px;overflow-y:scroll;overflow-x:hidden;display:none;">
+			<div class="grid-stack" id="consumptGraph" data-gs-height="20" data-gs-width="10">
+			<!-- Add one of these divs for each dorm.  Going to have to experiment with data-gs-x,data-gs-y, data-gs-width, and data-gs-height values to make it look nice-->
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="0"
+				data-gs-height="1" data-gs-width="9" data-gs-min-width="12">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="1"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="2"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="3"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="4"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="5"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="6"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="7"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="8"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="9"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="10"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="11"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="12"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="13"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="14"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="15"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+				<div class="grid-stack-item"
+				data-gs-x="50" data-gs-y="16"
+				data-gs-width="9" data-gs-min-width="12" data-gs-height="1">
+				<div class="grid-stack-item-content"></div>
+				</div>
+
+			</div>
+		</div>
+
+		<script src="./js/linegraph.js"></script>
+		<script src="js/foundation.min.js"></script>
+		<script src="./js/foundation-datepicker.min.js" type="text/javascript"></script>
+    	<script src="./js/datepicker.js" type="text/javascript"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
+</html>

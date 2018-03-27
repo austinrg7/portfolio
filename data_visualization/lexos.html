@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="./css/styles.css">
+<link rel="stylesheet" type="text/css" href="./css/lexos.css">
+<script src="./js/tessVals.js"></script>
+<script src="./js/jquery-2.2.3.min.js"></script>
+<script src="./js/jquery-ui-1.12.1.min.js"></script>
+<script src="./js/d3.v3.min.js"></script>
+<script src="./js/lexos.js"></script>
+
+</head>
+<body  style="margin:0;">
+<button class="round" style="float:left;"onclick="back()">&#8249;</button>
+<button class="round" style="float:right;"onclick="forward()">&#8250;</button>
+<div style="margin-left:16%;position: absolute;right: 0;bottom: auto; left: 0;z-index: 1;">
+    <div id='cssmenu'>
+        <ul>
+        	<li><a href='./projects.html'><span>About</span></a></li>
+            <li><a href='./heatmap.html'><span>Heat Map</span></a></li>
+            <li><a href='./linegraph.html'><span>Consumption Graph</span></a></li>
+            <li><a href='#'><span>Lexos</span></a></li>
+        </ul>
+    </div>
+</div>  
+<br style="display: block;margin-bottom:5%;">
+<div id="container" style="float:left;height:550px;width:550px;margin-top:4%;">
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="output" x="0" y="0" width="100%" height="100%" viewBox="0 0 575 575" preserveAspectRatio="none"></svg>
+
+</div> 
+<div id="explain" style="float:right;width:20%;margin-right:17%;margin-top:-1%;"><p id="explaination"></p></div>
+</body>
+</html> 

@@ -1,0 +1,31 @@
+br {
+    display: block;
+    margin-bottom: 4.5%;
+}
+
+h2{
+    margin-left: 23%;
+    margin-bottom: 2%;
+}
+
+.round {
+    margin: 0 80px;
+    padding: 13px 26px;
+    border-radius: 50%;
+    border-style: none;
+    background-color: rgba(0, 104, 175,0.8);
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    -webkit-transform: translateY(500%);
+    -ms-transform: translateY(500%);
+    transform: translateY(500%);
+}
+#centroids {
+    display: none;
+    pointer-events: none;
+
+}
+#text {
+    cursor:default;
+}

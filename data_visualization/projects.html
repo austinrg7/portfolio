@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<title>Projects</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+
+		<style type="text/css">
+			p{
+				font-family: 'Franklin Gothic Medium';
+				font-size: 1.26em;
+			}
+		</style>
+
+	</head>
+
+
+
+	<body style="overflow-y:hidden;">
+
+		<div style="margin-left:16%;position: absolute;right: 0;bottom: auto; left: 0;margin-top:-0.5%">
+			<div id='cssmenu'>
+				<ul>
+					<li><a href='#'><span>About</span></a></li>
+					<li><a href='./heatmap.html'><span>Heat Map</span></a></li>
+					<li><a href='./linegraph.html'><span>Consumption Graph</span></a></li>
+					<li><a href='./lexos.html'><span>Lexos</span></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<br style="display: block;margin-bottom:5%;">
+		<img src="./images/vis_bkrnd.jpg" width="80%" height="90%" style="position:absolute;margin-top:3%;left:8%;opacity: 0.4;">
+		<div style="position:relative;text-align:justify;margin-top:5%;width:80%;margin-left:8%;">
+			<p>All visualizations use real, although static, data for the sake of making the demonstrations simpler due to the loss of access to/infeasibility of the original dynamic sources. The source code for each visualization demo can be found under data_visualizations in my portfolio repo on <a href="#">github</a>.</p> 
+
+			<p>As part of the computer science major's capstone class, groups of four were asked to design and implement effective visualizations from data pulled directly from the power meters in each of the college's residential dorms.  As part of this assignment, I was the principal developer of two visualizations. Although both visualizations use the same static data set, the user can adjust the extent of the data set dynamically on both pages.</p>
+
+			<p>One of these visualizations is a heat map view of energy use on each dorm on campus. The map layer centered on Wheaton College Campus comes from openstreetmaps and data is represented by applying a color scale to a geoJSON features layer. You can view a live demo of the visualization by clicking on the "Heat Map" tab.</p>
+
+			
+			<p>The other visualizations is a time line view of energy use on each dorm on campus. Each data point, energy consumption values, in the data set the user has chosen to visualize is represented by a properly scaled bar. Each bar is placed next to the other to create a timeline. You can view a live demo of the visualization by clicking on the "Consumption Graph" tab.</P>
+
+
+			<p>During the summer of 2015 I worked with a team of students and professors to further the development of the Lexomics Research Group's <a href="http://lexos.wheatoncollege.edu">Lexos</a> web app from v2.0 to v2.5.  While I contributed to a variety of Lexos's functions, the Voronoi Tessalation data visualization on the <a href="http://lexos.wheatoncollege.edu/kmeans">"K-means" page</a> was something I developed alone and found particularly interesting. This visualization represents the data produced by the K-means clustering algorithm in a visaully stunning and informative manner. As an example of how this tool functions, I have extracted and re-factored the original "K-means" code. You can view a live demo of the visualization by clicking on the "Lexos" tab. The source code for the entire Lexos web app (v3.1.1) is available on <a href="https://github.com/WheatonCS/Lexos">github</a>.</p> 
+		</div>
+	</body>
+</html>
