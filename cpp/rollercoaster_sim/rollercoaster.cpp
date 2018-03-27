@@ -84,7 +84,7 @@ public:
      
     //Begin member functions---
 
-    void readIn(char* inFilename);
+    void readIn(string inFilename);
     void drawCar();                 
     void drawKnots();
     
@@ -141,7 +141,7 @@ Model rollercoaster;
 //---End object declarations
 
 //Begin object member function definitions---
-void Model::readIn(char* inFilename){
+void Model::readIn(string inFilename){
 	/*
 	Reads in the input file and gives numKnots, xCoords, and yCoords
 	their relevant values.
@@ -153,7 +153,7 @@ void Model::readIn(char* inFilename){
 	int inX,inY; //Hold the x and y values from the input file as they come in
 	
 	//Open the file
-	ifstream inFile (inFilename);
+	ifstream inFile (inFilename.c_str());
 	if (inFile.is_open()) {
 
 		while(!inFile.eof()){
@@ -1159,6 +1159,17 @@ void keyboard (unsigned char key, int x, int y){
 
 int main (int argc, char** argv)
 {
+	//Read in the user input file
+	cout << "\nEnter the name of the file (including the extension) containing the jobs for this simulation."<< endl;
+    //Variable for input filename
+    string inFileName;   
+    cin >> inFileName;
+
+	rollercoaster.readIn(inFileName);  
+    //Variable for input file stream
+   
+    //Grabbed desired file... attempting to open
+    
 	//Output controls to console
 	cout<<"0: Choose linear piecewise spline (default)"<<endl;
 	cout<<"1: Choose parabolic piecewise spline"<<endl;
@@ -1169,8 +1180,7 @@ int main (int argc, char** argv)
 	cout<<"s: start animation"<<endl;
 	cout<<"q: quit"<<endl;
 
-	//Read in the user input file
-	rollercoaster.readIn(argv[1]);  
+
 
 	//Begin openGL initializations---
 	glutInit(&argc, argv);
