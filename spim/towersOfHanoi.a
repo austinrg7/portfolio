@@ -1,0 +1,186 @@
+#----------------------------------------------------------------------------#
+# Austin Gillis
+# Purpose: Use SPIM subroutines in the form of recursion to solve
+#          a Towers of Hanoi problem using the amount of disks 
+#          specified by the user. 
+# Input:   An integer >=1 representing the number of disks   
+# Output:  1) The list of moves required to solve the Towers of 
+#             Hanoi problem specified by the user.
+#          2) The total number of moves required. 
+#----------------------------------------------------------------------------#
+	.data
+
+inputRequest:  			.asciiz "Enter number of disks: "
+outputOne:				.asciiz "Move "
+outputTwo:				.asciiz " to "
+outputThree: 			.asciiz "Total number of moves required: "
+outputFour: 			.asciiz "Computation completed.  Goodbye..."
+endl: 					.asciiz "\n"
+towerA: 				.asciiz "A"
+towerB: 				.asciiz "B"
+towerC: 				.asciiz "C"
+
+#----------------------------------------------------------------------------#
+        .text
+        .globl main
+main:
+		
+			#Ask the user for input
+        	li 				$v0, 4			
+        	la 				$a0, inputRequest		
+        	syscall		
+ 
+        	li 				$v0, 5			
+        	syscall			
+ 
+ 			#Move number into arg 1
+			move 			$a0, $v0	
+			#Put A into arg 2
+			la 				$a1, towerA
+			#Put B into arg 3		
+			la 				$a2, towerB	
+			#Put C into arg 4	
+			la 				$a3, towerC
+
+			#Jump and link to recursive function hanoi
+			jal 			hanoi			
+ 	
+			#Newline
+			li 				$v0, 4       			
+			la 				$a0, endl    			
+			syscall
+
+			# print outputThree
+			li 				$v0, 4       		
+			la 				$a0, outputThree    			
+			syscall
+
+			#Print out the total number of moves calculated by the recursive function
+			li 				$v0, 1       		
+			addi 			$a0, $v1, 0	
+			syscall
+
+			#Newline
+			li 				$v0, 4       			
+			la 				$a0, endl    			
+			syscall
+
+			#Terinating message
+			li 				$v0, 4       		
+			la 				$a0, outputFour    			
+			syscall
+
+        	#Exit
+        	li 				$v0,10			
+        	syscall                         
+
+#---------------------------------------------------------
+hanoi:
+	
+			# Allocate storage for frame
+			subu			$sp, $sp, 56	
+			# Save return address
+			sw				$ra, 44($sp)
+			# Save frame pointer
+			sw				$fp, 40($sp)
+			# Reset frame pointer
+			addu			$fp, $sp, 52
+
+			#Allocate space for local variables
+			sw				$t9, 36($sp) 
+			sw				$t8, 32($sp)
+			sw				$t7, 28($sp)
+			sw				$t6, 24($sp)
+	
+			#Base case
+			beq				$a0, $zero, zero	
+	
+			#Save arguments
+			sw				$a0, -4($fp)		
+			sw				$a1, 0($fp)		
+			sw				$a2, 4($fp)		
+			sw				$a3, 8($fp)
+	
+			#Put n-1 in arg 0
+			addi			$a0, $a0, -1		
+			#Put a2 in t2 to save after swapping in next instruction
+			move			$t2, $a2		
+			#Swap args 2 and 3 for first call
+			move			$a2, $a3
+			move			$a3, $t2		
+			
+			#First recursive call hanoi(n-1, start, extra, finish)
+			jal				hanoi			
+	
+			#Move counter= hanoi(n-1, start, extra, finish)
+			move 			$t0, $v1
+
+			lw				$t9, -4($fp)		
+			lw				$t8, 0($fp)		
+			lw				$t7, 4($fp)		
+			lw				$t6, 8($fp)
+		
+  			#Output "Move "
+			li 				$v0, 4       		
+			la 				$a0, outputOne    		
+			syscall
+	
+			#Output the moving from peg
+			li 				$v0, 4       			
+			move 			$a0, $t8    			
+			syscall
+	
+			#Output " to "
+			li 				$v0, 4       			
+			la 				$a0, outputTwo    			
+			syscall
+	
+			#Output the moving to peg
+			li 				$v0, 4       			
+			move 			$a0, $t7    			
+			syscall
+	
+			#Move counter++
+			addi 			$t0, $t0, 1
+			sw  			$t0, 12($fp)
+
+			#Newline
+			li 				$v0, 4       			
+			la 				$a0, endl    			
+			syscall
+
+			# put n-1 in arg 0
+			addi 			$a0,$t9,-1		
+			# Move extra to arg 2
+			move 			$a1, $t6
+			# Move finish to arg 3	
+			move 			$a2, $t7
+			# Move start to arg 4	
+			move 			$a3, $t8	
+
+			# Second recursive call hanoi(n-1, extra, finish, start)
+			jal 			hanoi			
+
+			#Move counter+= hanoi(n-1, extra, finish, start)
+			lw				$t0, 12($fp)
+			add 			$t0, $t0, $v1
+			sw  			$t0, 12($fp)
+
+#-----------------------------------------------------------------------
+zero:
+	
+			#Reload registers (i.e., undo what was done at beginning of hanoi)
+			lw				$t9, 36($sp)
+			lw				$t8, 32($sp)
+			lw				$t7, 28($sp)
+			lw				$t6, 24($sp)
+			lw  			$t0, 12($fp)
+			lw				$ra, 44($sp)
+			lw				$fp, 40($sp)
+			addu			$sp, $sp, 56
+	
+			#Return moves counter
+			move 			$v1, $t0
+	
+			j				$ra	
+

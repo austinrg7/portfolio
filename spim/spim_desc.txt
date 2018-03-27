@@ -1,0 +1,9 @@
+http://pages.cs.wisc.edu/~larus/spim.html
+
+assembly language programming (in SPIM) using computers running Linux.
+
+spim is a self-contained simulator that runs MIPS32 programs. It reads and executes assembly language programs written for this processor. spim also provides a simple debugger and minimal set of operating system services. spim does not execute binary (compiled) programs.
+
+spim implements almost the entire MIPS32 assembler-extended instruction set. (It omits most floating point comparisons and rounding modes and the memory system page tables.) The MIPS architecture has several variants that differ in various ways (e.g., the MIPS64 architecture supports 64-bit integers and addresses), which means that spim will not run programs compiled for all MIPS processors. MIPS compilers also generate a number of assembler directives that spim cannot process. These directives usually can be safely ignored.
+
+spim implements both a terminal and a window interface. On Microsoft Windows, Linux, and Mac OS X, the spim program provides the simple terminal interface and the QtSpim program provides the windowing interface.
