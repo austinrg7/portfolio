@@ -24,7 +24,6 @@ Output:  The program outputs to the console lines of the input file with the con
 
 #include <iostream>
 #include <string>
-#include <string.h>
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -81,9 +80,9 @@ int main(){
     sem_init(&find_replace_counter, 0, 0);
     sem_init(&write_out_counter, 0, 0);
   
-    //Pass the filename to the read function
-    char * cstr = new char [in_filename.length()+1];
-    strcpy (cstr, in_filename.c_str());
+    const char * cstr;//dealloaction handled by string class
+    cstr=in_filename.c_str();
+
 
     //Create the threads
     pthread_t thread1, thread2, thread3;
@@ -99,6 +98,10 @@ int main(){
     pthread_join(thread1, NULL);
     pthread_join(thread2, NULL);
     pthread_join(thread3, NULL);
+
+    sem_destroy(&find_replace_counter);//Deallocate semaphores
+    sem_destroy(&write_out_counter);//Deallocate semaphores
+
 
 
 	return 0;
