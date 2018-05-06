@@ -1,9 +1,23 @@
+CLIBS= 		-lm
 CPATHS=		-I/usr/include -L/usr/lib
-CFLAGS=		$(CPATHS)
+CFLAGS=		$(CPATHS)$(CLIBS)
+CC = g++
+OBJ = main.o job.o Simulation.o 
 
 
-cpu_sim:		main.cpp job.cpp Simulation.cpp
-		g++ main.cpp job.cpp Simulation.cpp -o cpu_sim $(CFLAGS)
+output.out: $(OBJ) 
+	 $(CC) $(FLAGS) $(OBJ) -o output.out 
 
-clean:
-		rm *.o
+main.o: main.cpp 
+	 $(CC)  main.cpp  $(FLAGS) -c  -o main.o 
+
+job.o: job.cpp 
+	 $(CC) job.cpp $(FLAGS) -c -o job.o 
+
+Simulation.o: Simulation.cpp 
+	 $(CC)  Simulation.cpp $(FLAGS) -c -o Simulation.o 
+
+
+clean: 
+	rm *.o
+	rm *.out
