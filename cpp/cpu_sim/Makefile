@@ -1,6 +1,6 @@
 CLIBS= 		-lm
 CPATHS=		-I/usr/include -L/usr/lib
-CFLAGS=		$(CPATHS)$(CLIBS)
+FLAGS=		$(CPATHS)$(CLIBS)
 CC = g++
 OBJ = main.o job.o Simulation.o 
 
